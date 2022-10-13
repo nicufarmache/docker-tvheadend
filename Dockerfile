@@ -12,6 +12,7 @@ ENV HOME="/config"
 
 # copy patches
 COPY patches/ /tmp/patches/
+COPY tvhpatches/ /tmp/tvhpatches/
 
 RUN \
  echo "**** install build packages ****" && \
@@ -149,6 +150,7 @@ RUN \
  git clone https://github.com/tvheadend/tvheadend.git /tmp/tvheadend && \
  cd /tmp/tvheadend && \
  git checkout ${TVHEADEND_COMMIT} && \
+ cp -a /tmp/tvhpatches/* ./ && \
  ./configure \
 	`#Encoding` \
 	--disable-ffmpeg_static \
